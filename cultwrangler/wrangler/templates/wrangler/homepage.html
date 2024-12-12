@@ -1,0 +1,120 @@
+<html>
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wdth,wght@87.5,300..800&display=swap" rel="stylesheet">
+
+        <style>
+            html {
+                background-color: rgb(183, 255, 220);
+                padding: 15px;
+            }
+
+            .main-content {
+                display: block;
+                font-family: "Open Sans", sans-serif;
+                font-variation-settings:
+                    "wdth" 87.5;
+                margin: auto;
+                padding: 20px 25px;
+                width: 35%;
+                height: 90%;
+                box-shadow: 10px 10px #678f7b;
+                background-color: white;
+                border-radius: 10px;
+                border: 1px solid rgb(192, 192, 192);
+            }
+            
+            .events-content {
+                display: block;
+                overflow-y: auto;
+                height: 89%;
+            }
+
+            .section-header {
+                display: block;
+                text-align: center;
+                /* font-size: 54px; */
+                font-size: 350%;
+            }
+
+            .event-title {
+                /* font-size: 28px; */
+                font-size: 175%;
+            }
+
+            .subtext {
+                /* font-size: 16px; */
+                font-size: 100%;
+            }
+
+
+
+            .event-container {
+                border-radius: 8px;
+                border: 1px solid rgb(192, 192, 192);
+                padding: 5px 12px;
+                margin: 8px 0px;
+            }
+
+            .event-button {
+                border-radius: 5px;
+                border: none;
+                color: #444444;
+                font-size: 85%;
+                width: 100%;
+                height: 5%;
+                margin: 4px 0px;
+            }
+
+            @media (max-width: 992px) {
+                .main-content {
+                    width: 90%;
+                    height: 93%;
+                    border-radius: 20px;
+                }
+
+                .section-header {
+                    font-size: 700%;
+                }
+
+                .event-container {
+                    margin: 16px 0px;
+                    border-radius: 16px;
+                }
+
+                .event-title {
+                    font-size: 375%;
+                }
+
+                .event-button {
+                    border-radius: 10px;
+                    font-size: 175%;
+                }
+
+                .subtext {
+                    font-size: 200%;
+                }
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <div class="main-content">
+            <span class="section-header">Cult Wrangler</span>            
+            <hr>
+            <div class="events-content">
+                {% for e in events %}
+                <div class="event-container">
+                    <span class="event-title">{{e.name}}</span>
+                    <br>
+                    <span class="subtext">{{e.description}}</span>
+                    <br>
+                    <a href="/event/{{e.uid}}"><button class="event-button">RSVP</button></a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </body>
+</html>
