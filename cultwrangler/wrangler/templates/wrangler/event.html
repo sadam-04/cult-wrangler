@@ -1,121 +1,136 @@
-<html>
-    <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wdth,wght@87.5,300..800&display=swap" rel="stylesheet">
+{% extends 'wrangler/homepage.html' %}
 
-        <style>
-            html {
-                background-color: rgb(183, 255, 220);
-                padding: 15px;
-            }
+{% block style %}
+<style>
+    .accordion-trigger {
+        margin-bottom: 5px;
+    }
 
-            .main-content {
-                display: block;
-                font-family: "Open Sans", sans-serif;
-                font-variation-settings:
-                    "wdth" 87.5;
-                margin: auto;
-                padding: 20px 25px;
-                width: 35%;
-                height: 90%;
-                box-shadow: 10px 10px #678f7b;
-                background-color: white;
-                border-radius: 10px;
-                border: 1px solid rgb(192, 192, 192);
-            }
-            
-            .events-content {
-                display: block;
-                overflow-y: auto;
-                height: 89%;
-            }
+    .accordion-trigger:after {
+        content: '\2795\fe0e';
+        font-size: 100%;
+        margin-left: 2%;
+        position: fixed;
+        transform: translate(-20px, 7.5px);
+    }
+    
+    .active:after {
+        content: '\2796\fe0e';
+    }
 
-            .section-header {
-                display: block;
-                text-align: center;
-                /* font-size: 54px; */
-                font-size: 350%;
-            }
+    .accordion-content {
+        padding: 0 18px;
+        margin: 0;
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+    }
 
-            .event-title {
-                /* font-size: 28px; */
-                font-size: 175%;
-            }
+    ul {
+        list-style: none;
+        padding-left: 0;
+    }
 
-            .subtext {
-                /* font-size: 16px; */
-                font-size: 100%;
-            }
+    table, th, td {
+        border: 1px solid;
+    }
+
+    @media (max-width: 992px) {
+        .accordion-trigger:after {
+            content: '\2795\fe0e';
+            font-size: 250%;
+            margin-left: 2%;
+            position: fixed;
+            transform: translate(0px, 15px);
+        }
+        
+        .active:after {
+            content: '\2796\fe0e';
+        }
+    }
 
 
+</style>
+{% endblock %}
 
-            .event-container {
-                border-radius: 8px;
-                border: 1px solid rgb(192, 192, 192);
-                padding: 5px 12px;
-                margin: 8px 0px;
-            }
+{% block content %}
+    <span class="header">{{event.name}}</span>
+    <br>
+    <span class="para-text">{{event.description}}</span>
+    
+    <br>
+    <hr>
 
-            .event-button {
-                border-radius: 5px;
-                border: none;
-                color: #444444;
-                font-size: 85%;
-                width: 100%;
-                height: 5%;
-                margin: 4px 0px;
-            }
+    <div class="accordion-trigger">
+        <span class="header-2">Your response</span>
+    </div>
+    <form method="POST" class="accordion-content response-form" action="/submitresponse/">
+        {% for t in event.times %}
+        <input type="checkbox" name="time-option-{{t}}">
+        <span class="time-option">{{t}}</span>
+        <br>
+        {% endfor %}
+        <input type="text" value="{{user.username}}" name="submitter" hidden>
+        <input type="text" value="{{event.uid}}" name="event" hidden>
+        {% csrf_token %}
 
-            @media (max-width: 992px) {
-                .main-content {
-                    width: 90%;
-                    height: 93%;
-                    border-radius: 20px;
-                }
+        <label for="save-response-bttn" class="bttn">Save response</label>
+        <input type="submit" id="save-response-bttn" style="display: none;">
+    </form>
 
-                .section-header {
-                    font-size: 700%;
-                }
+    <hr>
 
-                .event-container {
-                    margin: 16px 0px;
-                    border-radius: 16px;
-                }
-
-                .event-title {
-                    font-size: 375%;
-                }
-
-                .event-button {
-                    border-radius: 10px;
-                    font-size: 175%;
-                }
-
-                .subtext {
-                    font-size: 200%;
-                }
-            }
-
-        </style>
-    </head>
-
-    <body>
-        <div class="main-content">
-            <span class="section-header">Cult Wrangler</span>
-            <hr>
-            <span class="event-title">{{event.name}}</span>
-            <br>
-            <span class="subtext">{{event.description}}</span>
-            <form method="POST" action="/submitresponse/">
+    <div class="accordion-trigger">
+        <span class="header-2">Other responses</span>
+    </div>
+    <div class="accordion-content">
+        {% if submissions %}
+        <div style="overflow-x: auto; white-space: nowrap;">
+            <table>
+                <tr>
+                    <th>Name</th>
+                <!-- make a column for each date/time -->
                 {% for t in event.times %}
-                <input type="checkbox" name="{{t}}">
-                <span class="time-option">{{t}}</span>
-                <br>
+                    <th>{{t}}</th>
                 {% endfor %}
-                {% csrf_token %}
-                <input type="submit">
-            </form>
+                </tr>
+
+                {% for s in submissions %}
+                <tr>
+                    <td>{{s.submitter}}</td>
+                    {% for d in s.data %}
+                        {% if d.response == True %}
+                            <td style="background-color: #90EE90;">Yes</td>
+                        {% else %}
+                        <td style="background-color: #ff7f7f;">No</td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
         </div>
-    </body>
-</html>
+        {% else %}
+        <span class="para-text">No responses yet</span>
+        {% endif %}
+    </div>
+    
+    <hr>
+    
+    <script>
+        trigs = document.getElementsByClassName("accordion-trigger");
+
+        for (var i = 0; i < trigs.length; i++)
+        {
+            trigs[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        }
+    </script>
+{% endblock %}

@@ -16,11 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from wrangler.views import home, event_view, submit_response
+from wrangler import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('event/<uuid:eid>/', event_view, name="event_view"),
-    path('submitresponse/', submit_response, name="submit_response"),
-    path('', home, name="home")
+    path('event/<uuid:eid>/', views.event_view, name="event_view"),
+    path('submitresponse/', views.submit_response, name="submit_response"),
+    path('login/', views.user_login, name="login"),
+    path('logout/', views.user_logout, name="logout"),
+    path('', views.home, name="home")
 ]

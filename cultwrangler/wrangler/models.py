@@ -5,9 +5,11 @@ from uuid import uuid4
 class Event(models.Model):
     name = models.CharField(max_length=64)
     description = models.CharField(max_length=1024)
+    creator = models.CharField(max_length=255)
     times = models.JSONField()
     uid = models.UUIDField(primary_key=True, default=uuid4, editable=False)
 
 class EventResponse(models.Model):
     submitter = models.CharField(max_length=255)
-    times = models.JSONField()
+    event_id = models.UUIDField()
+    responses = models.JSONField()
