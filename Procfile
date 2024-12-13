@@ -1,1 +1,1 @@
-web: gunicorn cult-wrangler.wsgi:application
+web: gunicorn cultwrangler.wsgi:application
