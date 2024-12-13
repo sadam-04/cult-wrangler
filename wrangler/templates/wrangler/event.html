@@ -41,12 +41,17 @@
             content: '\2795\fe0e';
             font-size: 250%;
             margin-left: 2%;
-            position: fixed;
+            position: relative;
             transform: translate(0px, 15px);
         }
         
         .active:after {
             content: '\2796\fe0e';
+        }
+
+        .time-option {
+            display: inline-block;
+            font-size: 300%;
         }
     }
 
@@ -71,11 +76,11 @@
         <span class="time-option">{{t}}</span>
         <br>
         {% endfor %}
-        <input type="text" value="{{user.username}}" name="submitter" hidden>
-        <input type="text" value="{{event.uid}}" name="event" hidden>
+        <input type="hidden" value="{{user.username}}" name="submitter" hidden>
+        <input type="hidden" value="{{event.uid}}" name="event" hidden>
         {% csrf_token %}
 
-        <label for="save-response-bttn" class="bttn">Save response</label>
+        <label for="save-response-bttn" class="bttn"><span class="bttn-label-text">Save response</span></label>
         <input type="submit" id="save-response-bttn" style="display: none;">
     </form>
 
@@ -119,6 +124,17 @@
     
     <script>
         trigs = document.getElementsByClassName("accordion-trigger");
+
+        document.addEventListener("DOMContentLoaded", function() {
+            if (trigs)
+            {
+                trigs[0].classList.add("active");
+                var content = trigs[0].nextElementSibling;
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        })
+        
+
 
         for (var i = 0; i < trigs.length; i++)
         {

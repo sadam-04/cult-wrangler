@@ -73,14 +73,26 @@
                 font-size: 100%;
             }
 
+            input[type='text'], input[type='password'] {
+                display: block;
+                width: 40%;
+                height: 5%;
+                padding: 1.5%;
+                margin: auto;
+                margin-bottom: 10px;
+                border: 1px solid rgb(192, 192, 192);
+                border-radius: 8px;
+            }
+
             .bttn {
                 display: block;
-                border-radius: 5px;
+                border-radius: 12px;
                 border: 1px solid rgb(215, 215, 215);
                 text-align: center;
                 color: #444444;
                 background-color: white;
                 font-size: 90%;
+                font-weight: bold;
                 width: 100%;
                 padding: 10px 0px;
                 margin: auto;
@@ -93,6 +105,7 @@
 
             .bttn:hover {
                 box-shadow: 1px 3px 4px 0px #a8a8a8;
+                background-color: #97ffc4;
             }
 
             @media (max-width: 992px) {
@@ -123,10 +136,38 @@
                     font-size: 200%;
                 }
 
-                .bttn {
-                    border-radius: 10px;
-                    font-size: 200%;
+                .bttn-label-text {
+                    display: table-cell;
+                    vertical-align: middle;
+                    text-align: center;
                 }
+
+                input[type='text'], input[type='password'] {
+                    width: 90%;
+                    height: 8%;
+                    margin: auto;
+                    padding-left: 40px;
+                    margin-bottom: 20px;
+                    justify-content: center;
+                    border-radius: 95px;
+                    border-color: #555;
+                    border-width: 2px;
+                    font-size: 250%;
+                }
+
+                .bttn {
+                    display: table;
+                    width: 65%;
+                    height: 8%;
+                    padding: auto;
+                    font-size: 250%;
+                    /* vertical-align: middle; */
+                    border-width: 2px;
+                    border-color: #ccc;
+                    border-radius: 95px;
+                    background-color: #97ffc4;
+                }
+
             }
 
             .center {
@@ -190,7 +231,7 @@
 
             <span class="section-header">
                 <a href="{% url 'home' %}" style="text-decoration: none; color: black;">
-                {% block section-header %}Wrangler{% endblock %}            
+                {% block section-header %}Cult Wrangler{% endblock %}            
                 </a>
             </span>
             <hr>
