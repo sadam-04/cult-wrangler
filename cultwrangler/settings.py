@@ -28,6 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'localhost',
     '174.138.69.189',
+    'adamsai.ch'
 ]
 
 
