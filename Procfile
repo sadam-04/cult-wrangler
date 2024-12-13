@@ -1,1 +1,1 @@
-web: gunicorn cultwrangler.wsgi:application
+web: gunicorn --pythonpath cultwrangler cultwrangler.wsgi:application
