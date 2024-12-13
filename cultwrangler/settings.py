@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
-    'cult-wrangler-f10c61cdbac5.herokuapp.com',
+    '174.138.69.189',
 ]
 
 

@@ -1,2 +1,5 @@
 .venv/
 db.sqlite3
+cultwrangler/__pycache__
+wrangler/__pycache__
+wrangler/migrations/__pycache__
