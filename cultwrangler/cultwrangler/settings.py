@@ -26,9 +26,8 @@ SECRET_KEY = 'django-insecure-zy^b24n5)0*dv!u1l#=^t!ra6gzz34*6_)jqsp=w$c(*k-klox
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '192.168.1.205',
-    '129.161.88.52',
-    'localhost'
+    'localhost',
+    'cult-wrangler-f10c61cdbac5.herokuapp.com',
 ]
 
 
