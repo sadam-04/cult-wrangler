@@ -21,7 +21,9 @@ def event_view(request, eid):
 
     submissions = []
     for er in EventResponse.objects.filter(event_id=eid):
-        # resp_data = list(zip(event.times, er.responses))
+        # ensure number of responses matches number of options
+        if len(event.times) != len(json.loads(er.responses)):
+            continue
 
         r_idx = 0
         for r in json.loads(er.responses):
