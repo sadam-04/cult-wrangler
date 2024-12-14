@@ -36,6 +36,15 @@
         border: 1px solid;
     }
 
+    .response-table {
+        width: 100%;
+        margin: auto;
+    }
+
+    .name-col {
+        width: 75px;
+    }
+
     @media (max-width: 992px) {
         .accordion-trigger:after {
             content: '\2795\fe0e';
@@ -92,9 +101,9 @@
     <div class="accordion-content">
         {% if submissions %}
         <div style="overflow-x: auto; white-space: nowrap;">
-            <table>
+            <table class="response-table para-text">
                 <tr>
-                    <th>Name</th>
+                    <th class="name-col">Name</th>
                 <!-- make a column for each date/time -->
                 {% for t in event.times %}
                     <th>{{t}}</th>
@@ -134,8 +143,6 @@
             }
         })
         
-
-
         for (var i = 0; i < trigs.length; i++)
         {
             trigs[i].addEventListener("click", function() {
