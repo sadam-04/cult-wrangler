@@ -265,13 +265,12 @@
     <body>
         <div class="main-content">
             <div class="messages">
-                <!-- {% for m in messages %} -->
+                {% for m in messages %}
                 <div class="message para-text {{ m.tags }}">
-                    <!-- message text -->
                     {{ m }}
                     <span class="closebtn" onclick="this.parentElement.style.display='none';">&nbsp;&times;</span>
                 </div>
-                <!-- {% endfor %} -->
+                {% endfor %}
             </div>
 
             <div class="nav-container" style="display: flex; justify-content: space-between;">
