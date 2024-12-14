@@ -29,7 +29,8 @@ ALLOWED_HOSTS = [
     'localhost',
     '192.168.1.112',
     '174.138.69.189',
-    'adamsai.ch'
+    'adamsai.ch',
+    'cw.adamsai.ch',
 ]
 
 
