@@ -57,11 +57,6 @@
         .active:after {
             content: '\2796\fe0e';
         }
-
-        .time-option {
-            display: inline-block;
-            font-size: 300%;
-        }
     }
 
 
@@ -81,9 +76,9 @@
     </div>
     <form method="POST" class="accordion-content response-form" action="/submitresponse/">
         {% for t in event.times %}
-        <input type="checkbox" name="time-option-{{t}}">
-        <span class="time-option">{{t}}</span>
-        <br>
+            <input type="checkbox" name="time-option-{{t}}" id="time-option-{{t}}">
+            <label for="time-option-{{t}}" class="para-text">{{t}}</label>
+            <br>
         {% endfor %}
         <input type="hidden" value="{{user.username}}" name="submitter" hidden>
         <input type="hidden" value="{{event.uid}}" name="event" hidden>
