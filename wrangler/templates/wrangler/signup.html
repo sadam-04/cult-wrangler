@@ -1,0 +1,74 @@
+{% extends 'wrangler/homepage.html' %}
+
+{% block style %}
+<style>
+    .form-field {
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+
+    .help-text {
+        display: block;
+        font-size: 12px;
+        width: 70%;
+        margin: auto;
+    }
+
+    .login {
+        display: block;
+    }
+
+    input[type="text"], input[type="password"] {
+        width: 65%;
+    }
+
+    .bttn {
+        width: 30%;
+        margin-top: 3%;
+    }
+
+    @media (max-width: 992px) {
+        .bttn {
+            width: 60%;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="form-container">
+    <span class="header center">Create account</span>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-field">
+            {{ form.username }}
+        </div>
+
+        <div class="form-field">
+            {{ form.email }}
+        </div>
+    
+        <div class="form-field">
+            {{ form.affiliation }}
+        </div>
+    
+        <div class="form-field">
+            {{ form.password1 }}
+            <div class="help-text">
+                {{ form.password1.help_text }}
+            </div>
+        </div>
+    
+        <div class="form-field">
+            {{ form.password2 }}
+        </div>
+    
+        <div class="form-field">
+            <label for="create-usr-bttn" class="bttn"><span class="bttn-label-text">Create</span></label>
+            <input type="submit" id="create-usr-bttn" style="display: none;">
+        </div>
+    </form>
+</div>
+
+{% endblock %}

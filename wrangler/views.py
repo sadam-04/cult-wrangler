@@ -1,8 +1,10 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.http import HttpResponse
 from django.contrib import messages
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
+from wrangler.forms import EventForm, SignUpForm
 from .models import Event, EventResponse
 import json
 
@@ -10,6 +12,36 @@ import json
 def home(request):
     events = Event.objects.all()
     return render(request, "wrangler/homepage.html", {'events':events})
+
+def can_create_event(user):
+    usr_events =Event.objects.filter(creator=user)
+    if len(usr_events) <= 20:
+        return True
+    else:
+        return False
+
+def can_create_user():
+    users = User.objects.all()
+    if len(users) <= 50:
+        return True
+    else:
+        return False
+
+@login_required
+def create_event(request):
+    if request.method == 'POST':
+        form = EventForm(request.POST)
+        if form.is_valid():
+            event = form.save(commit=False)
+            event.creator = request.user
+            event.save()
+            return redirect('home')
+    else:
+        form = EventForm()
+    if can_create_event(request.user):
+        return render(request, "wrangler/create_event.html", {'form': form})
+    else:
+        return redirect("home")
 
 @login_required
 def event_view(request, eid):
@@ -65,7 +97,21 @@ def submit_response(request):
         else:
             messages.error(request, "Invalid or missing data!")
 
-    return redirect('home')
+    return redirect("home")
+
+def user_signup(request):
+    if not can_create_user():
+        return redirect("home")
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect("home")
+    else:
+        form = SignUpForm()
+
+    return render(request, 'wrangler/signup.html', {'form': form})
 
 def user_login(request):
     if request.method == 'POST':

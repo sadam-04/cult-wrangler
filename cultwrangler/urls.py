@@ -20,8 +20,10 @@ from wrangler import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('event/new/', views.create_event, name="create_event"),
     path('event/<uuid:eid>/', views.event_view, name="event_view"),
     path('submitresponse/', views.submit_response, name="submit_response"),
+    path('signup/', views.user_signup, name="signup"),
     path('login/', views.user_login, name="login"),
     path('logout/', views.user_logout, name="logout"),
     path('', views.home, name="home")

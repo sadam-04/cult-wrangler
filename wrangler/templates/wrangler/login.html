@@ -2,14 +2,6 @@
 
 {% block style %}
 <style>
-    .login-form-container {
-        padding: 20px;
-        padding-top: 5px;
-        border-radius: 10px;
-        background-color: #f8f8f8;
-        border: 1px solid #ccc;
-    }
-
     .login {
         display: block;
     }
@@ -28,7 +20,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="login-form-container">
+<div class="form-container">
     <span class="header center">Login</span>
     <form method="post" class="login">
         {% csrf_token %}
@@ -38,5 +30,7 @@
         <label class="bttn" for="submitbtn"><span class="bttn-label-text"><b>Log in</b></span></label>
         <input type="submit" id="submitbtn" style="display: none;"></input>
     </form>
+    
+    <a href="{% url 'signup' %}" class="center-block alink">Create account</span>
 </div>
 {% endblock %}
