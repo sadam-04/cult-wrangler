@@ -37,8 +37,6 @@ def event_view(request, eid):
 
         submissions.append({"submitter":er.submitter, "event_id":er.event_id, "data":resp_data})
 
-    print("TIMESCORES: " + str(time_scores))
-
     return render(request, "wrangler/event.html", {'event':event, 'submissions':submissions})
 
 @login_required
