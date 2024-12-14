@@ -3,7 +3,7 @@
 {% block style %}
 <style>
     input[type="text"] {
-        width: 50%;
+        width: 77%;
         margin: 10px;
         margin-left: 0;
     }
@@ -12,13 +12,26 @@
         margin-bottom: 0;
         padding-bottom: 0;
     }
+
+    @media (max-width: 992px) {
+        input[type="text"] {
+            width: 100%;
+            margin:auto;
+            margin-top: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            font-size: 200%;
+        }
+    }
 </style>
 {% endblock %}
 
 {% block content %}
 <span class="header">Create event</span>
 <br>
-<span class="para-text">This page is a work in progress</span>
+<span class="para-text">This page is a work in progress&#x2757;&#x2757;&#x2757;</span>
 <hr>
 
 <div class="form-container">
@@ -26,7 +39,7 @@
         {% csrf_token %}
         <input type="text" name="name" value="{{ form.title.value|default:'' }}" placeholder="Title">
         <input type="text" name="description" value="{{ form.description.value|default:'' }}" placeholder="Description">
-        <span class="para-text">The field below should contain a JSON list of options for users to select.<br>Example: ["January 5th", "December 27th", ...]</span>
+        <span class="para-text">The field below should contain a JSON-list of string options for users to select.<br>Example: ["January 5th", "December 27th", ...]</span>
         <br>
         {{form.times}}
         <label for="create-event-bttn" class="bttn"><span class="bttn-label-text">Create</span></label>
