@@ -1,2 +1,2 @@
 # cult-wrangler
-Hangout coordination planner
+A web app for coordinating event times and availability between multiple people.
